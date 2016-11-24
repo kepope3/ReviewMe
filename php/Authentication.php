@@ -10,7 +10,7 @@
 class Authentication {
 
     //function used to generate unique API keys
-    public function GenerateAPIKey()
+    public function GenerateAPIKey($usrName)
     {
         //loop until unique API key is generated and saved
         while (1)
@@ -25,7 +25,14 @@ class Authentication {
             //attempt to save key
             if ($this->InsertKey($privateKey))
             {
-                return $publicKey;
+                //send email to user
+                //make new mailsender object
+                $ms = new MailSender();
+                //create message               
+                $msg= GetConfirmationMsgPriv($usrName,$publicKey,$privateKey);
+                                
+                $ms->SendMail("ReviewMe", "Welcome", $msg," elisabeth_ottosen@hotmail.com");
+                break;
             }
         }
     }
@@ -37,7 +44,7 @@ class Authentication {
 
         //check if private API exists in db
         //if !$privateKey then add
-        echo "privateKey: ".$privateKey;
+        //echo "privateKey: ".$privateKey;
         
         return true;
     }
