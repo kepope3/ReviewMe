@@ -7,6 +7,7 @@
  * STEP 3: SERVER->Use public key to get private key and check if in db
  * STEP 4: SERVER->Generate signature how client did (using private key)
  * STEP 5: SERVER->Compare signatures and allow access if they match
+ * https://newsapi.org/account API: b8ccf652e66b4852bef9cb966d921e1f
  */
 
 $curl = curl_init();

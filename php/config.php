@@ -40,6 +40,7 @@ function GetConfirmationMsgPriv($usrName,$publicKey,$secret)
                         ."<br><br>"
                         ."Regards,<br><br>"
                         ."ReviewMe Management :)";
+        return $msg;
 }
 ?>
 

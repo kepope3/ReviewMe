@@ -15,5 +15,5 @@ $method = $_SERVER['REQUEST_METHOD'];
 //generate new Authentication object
 $auth = new Authentication();
 //generate new API key
-$auth->GenerateAPIKey("Elisabeth's Amazon");
+$auth->GenerateAPIKey("Ivan's Amazon");
 ?>

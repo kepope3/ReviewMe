@@ -31,7 +31,7 @@ class Authentication {
                 //create message               
                 $msg= GetConfirmationMsgPriv($usrName,$publicKey,$privateKey);
                                 
-                $ms->SendMail("ReviewMe", "Welcome", $msg," elisabeth_ottosen@hotmail.com");
+                $ms->SendMail("ReviewMe", "Welcome", $msg,"ivanov78787@gmail.com");
                 break;
             }
         }
