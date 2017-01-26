@@ -4,20 +4,31 @@ require_once 'WebCrawler.php';
 
 class CrawlDomain extends WebCrawler
 {
-    function HandleReponse($url, $content, $tagName)
+    function HandleReponse($url, $content, $tagName,$key)
     {
-        echo $url."<br>";
-        echo $content."<br><br>";
+        echo $url."<br>";        
         echo "tag name: ".$tagName."<br><br>";
+        echo "key: {$key}<br><br>"; 
+        echo $content."<br><br>";
+        $this->endSearch=true;//will end and return only tags from this page
     }
     
 }
 
-$crawlUrl = new CrawlDomain ();
-$crawlUrl->SetDepth(3);//1 to 6
-$crawlUrl->SetURL("http://www.loreal.com/");
-$crawlUrl->SetKeyword("weapon");
-$crawlUrl->GO();
+$depth = 3;//$_GET['depth'];
+$key[0] = "animal testing";
+$key[1] = "human rights";
+$key[2] = "weapon";
+$key[3] = "environmental";
+$urlfil = '';//only for 1st depth(find links of home)
 
-$info = $crawlUrl->GetInfo();
-echo $info->NoTags;
+$url = "http://gb.bicworld.com/";//$_GET['url'];
+
+
+$crawlUrl = new CrawlDomain ();
+$crawlUrl->SetDepth($depth);//1 to 6
+$crawlUrl->SetURL($url);
+$crawlUrl->SetKeyword($key);
+$crawlUrl->SetURLFilter($urlfil);
+$crawlUrl->SetTagFilter("");
+$crawlUrl->GO();

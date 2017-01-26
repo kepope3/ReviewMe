@@ -3,11 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/ReviewMe/php/MailSender.php</file>
-            <file>file:/C:/xampp/htdocs/ReviewMe/index.php</file>
-            <file>file:/C:/xampp/htdocs/ReviewMe/php/Authentication.php</file>
-            <file>file:/C:/xampp/htdocs/ReviewMe/php/config.php</file>
-            <file>file:/C:/xampp/htdocs/ReviewMe/DummyClient.php</file>
+            <file>file:/C:/xampp/htdocs/ReviewMe/WebCrawler/WebCrawler.php</file>
+            <file>file:/C:/xampp/htdocs/ReviewMe/Amazon/GetHtml.php</file>
         </group>
     </open-files>
 </project-private>
