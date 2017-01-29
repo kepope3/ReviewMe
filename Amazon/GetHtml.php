@@ -1,10 +1,10 @@
 <?php
 
 // Your AWS Access Key ID, as taken from the AWS Your Account page
-$aws_access_key_id = "AKIAIGYOUX7QEQ5Y7BMQ";
+$aws_access_key_id = "";
 
 // Your AWS Secret Key corresponding to the above ID, as taken from the AWS Your Account page
-$aws_secret_key = "kDflG2k+xPqq8x2OubX+48y9RrWruCN7iIb7hlkN";
+$aws_secret_key = "";
 
 // The region you are interested in
 $endpoint = "webservices.amazon.com";
@@ -15,7 +15,7 @@ $params = array(
     "Service" => "AWSECommerceService",
     "Operation" => "ItemLookup",
     "AWSAccessKeyId" => "AKIAIGYOUX7QEQ5Y7BMQ",
-    "AssociateTag" => "cam05a-20",
+    "AssociateTag" => "",
     "ItemId" => "B00005AC5L",
     "IdType" => "ASIN",
     "ResponseGroup" => "Reviews"
