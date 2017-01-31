@@ -74,8 +74,8 @@ class ComposerStaticInitec66d35d2c2bc74a8317ef855c9c8d71
 
     public static $classMap = array (
         'Product' => __DIR__ . '/../..' . '/app/models/product.php',
-        'permissions' => __DIR__ . '/../..' . '/app/models/permissions.php',
         'user' => __DIR__ . '/../..' . '/app/models/user.php',
+        'usr_type' => __DIR__ . '/../..' . '/app/models/usr_type.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

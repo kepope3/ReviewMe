@@ -2,50 +2,83 @@
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
-class user extends Eloquent
-{
+class user extends Eloquent {
+
     public $timestamps = [];
-    protected $fillable = ['usr_name','public_key'];
-    
-    public function permissions()
+    protected $fillable = ['name', 'public_key', 'fk1_id'];
+
+    public function usr_type()
     {
-        return $this->belongsToMany('permissions','usr_permissions',
-                'fk2_id','fk1_id');
+        return $this->hasOne('usr_type', 'id', 'fk1_id');
     }
-    public function createUser($name,$public_key)
+
+    public function createUser($params)
     {
-        if ($this->where('name','=',$name)->first())
+        $createUser = false;
+
+        //only admin can create new user
+        if (isset($params['admin_name']) && isset($params['admin_key']))
         {
-            return null;
+            //verify admin
+            $admin = $this->getUser($params['admin_name'], $params['admin_key']);
+            if (!is_null($admin))
+            {
+                if ($admin->usr_type->name == 'Admin')
+                {
+                    $createUser = true;
+                }
+            } else
+            {
+                return '{"error":"need valid admin to create user"}';
+            }
         }
-        else
+        //check if user already exists
+        $usr = $this->where('name', '=', $params['usr_name'])->first();
+        if (is_null($usr) && $createUser)
         {
+            //get public key
+            $publicKey = sha1($this->GenRndStr());
+            //hash public key
+            $privateKey = password_hash($publicKey, PASSWORD_DEFAULT);
             //create user
-            
-            //cannot perform action until permissions are set
+            $this->create([
+                'name' => $params['usr_name'],
+                'public_key' => $privateKey,
+                'fk1_id' => $params['usr_type']
+            ]);
+            return '{"msg":"user created","user name":"' . $params['usr_name'] . '"'
+                    . ',"public key":"' . $publicKey . '"}';
+        } else
+        {
+            return USER_EXISTS;
         }
     }
-    public function setUserPermissions()
+    public function deleteUser($name, $public_key)
     {
-        
-    }
-    public function verifyUser($name,$public_key)
-    {        
-        $user = $this->where('name','=',$name)->first();
-        /*if (password_verify($public_key, $user->public_key))
+        $user = $this->getUser($name, $public_key);
+        if (!is_null($user))
         {
-            
-        }*/
-        if ($public_key==$user->public_key)
-        {
-        return $user;
+            $user->delete();
+            return '{"msg":"user deleted","user name":"' . $name . '"'
+                    . ',"public key":"' . $public_key . '"}';
         }
         else
         {
-            return null;
+            return USER_NOT_EXIST;
         }
-        
     }
+    public function getUser($name, $public_key)
+    {
+        $user = $this->where('name', '=', $name)->first();
+        if ($user && password_verify($public_key, $user->public_key))
+        {
+            return $user;
+        } else
+        {
+            return null;//'{"error":"user does not exist"}';
+        }
+    }
+
     private function GenRndStr()
     {
         //include all numeric and alphbet chars + time
@@ -61,5 +94,5 @@ class user extends Eloquent
         }
         return $randomString;
     }
-}
 
+}

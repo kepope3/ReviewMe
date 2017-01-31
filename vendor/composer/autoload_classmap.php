@@ -7,6 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Product' => $baseDir . '/app/models/product.php',
-    'permissions' => $baseDir . '/app/models/permissions.php',
     'user' => $baseDir . '/app/models/user.php',
+    'usr_type' => $baseDir . '/app/models/usr_type.php',
 );

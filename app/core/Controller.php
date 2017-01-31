@@ -18,7 +18,7 @@ class Controller {
         $this->verb = $_SERVER['REQUEST_METHOD'];
     }
 
-    public function model($model)
+    public function getModel($model)
     {
         require_once "../app/models/{$model}.php";
         return new $model();
@@ -26,6 +26,7 @@ class Controller {
 
     public function view($view, $data)
     {
+        //data has scope here
         require_once "../app/views/{$view}.php";
     }
 
